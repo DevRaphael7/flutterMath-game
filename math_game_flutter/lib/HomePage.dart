@@ -47,9 +47,8 @@ class HomePageState extends State<HomePage>{
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),),
-                onPressed: (){
-
-                }),
+                onPressed: () {Navigator.of(context).pushNamed("/quiz");}
+                ),
             ),
           ],
         ),
