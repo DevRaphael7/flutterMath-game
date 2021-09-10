@@ -1,42 +1,52 @@
 import 'dart:math';
 
-class Quiz{
-  int numero1;
-  int numero2;
-  int numeroAleatorio;
+class MathGame{
+  int _numeroAleatorio1;
+  int _numeroAleatorio2;
+  int resposta;
   Random rand;
+  int resposta1;
+  int resposta2;
+  int resposta3;
+  int resposta4;
 
-  int gerarNumeroAleatorio(int number){
-    numeroAleatorio = rand.nextInt(number);
-    return this.numeroAleatorio;
-  }
+  void setNumeroAleatorio1(int _numeroAleatorio1) => this._numeroAleatorio1 = _numeroAleatorio1;
+  void setNumeroAleatorio2(int _numeroAleatorio2) => this._numeroAleatorio2 = _numeroAleatorio2;
 
-  void gerarRespostas( String resposta1, String resposta2, String resposta3, String resposta4) {
-    if ( numeroAleatorio < 20 ) {
-      resposta1 = rand.nextInt(30).toString();
-      resposta2 = rand.nextInt(10).toString();
-      resposta3 = rand.nextInt(80).toString();
-      resposta4 = numeroAleatorio.toString();
-    } else if ( numeroAleatorio >= 20 && numeroAleatorio < 40 ) {
-      resposta1 = rand.nextInt(90).toString();
-      resposta2 = numeroAleatorio.toString();
-      resposta3 = rand.nextInt(40).toString();
-      resposta4 = rand.nextInt(40).toString();
-    } else if ( numeroAleatorio >= 40 && numeroAleatorio < 60 ) {
-      resposta1 = rand.nextInt(90).toString();
-      resposta2 = rand.nextInt(10).toString();
-      resposta3 = numeroAleatorio.toString();
-      resposta4 = rand.nextInt(60).toString();
-    } else if ( numeroAleatorio >= 60 && numeroAleatorio < 80 ) {
-      resposta1 = numeroAleatorio.toString();
-      resposta2 = rand.nextInt(20).toString();
-      resposta3 = rand.nextInt(40).toString();
-      resposta4 = rand.nextInt(60).toString();
+  void gerarRespostasePergunta(Random rand, int numero) {
+    this.resposta = rand.nextInt(numero);
+    if ( resposta < 20 ) {
+      this.resposta1 = rand.nextInt(30);
+      this.resposta2 = rand.nextInt(10);
+      this.resposta3 = rand.nextInt(80);
+      this.resposta4 = resposta;
+    } else if ( resposta >= 20 && resposta < 40 ) {
+      this.resposta1 = rand.nextInt(90);
+      this.resposta2 = resposta;
+      this.resposta3 = rand.nextInt(40);
+      this.resposta4 = rand.nextInt(40);
+    } else if ( resposta >= 40 && resposta < 60 ) {
+      this.resposta1 = rand.nextInt(90);
+      this.resposta2 = rand.nextInt(10);
+      this.resposta3 = resposta;
+      this.resposta4 = rand.nextInt(60);
+    } else if ( resposta >= 60 && resposta < 80 ) {
+      this.resposta1 = resposta;
+      this.resposta2 = rand.nextInt(20);
+      this.resposta3 = rand.nextInt(40);
+      this.resposta4 = rand.nextInt(60);
     } 
   } 
 
   bool acertouOuNao(String resposta){
-    if (numeroAleatorio == int.tryParse(resposta)) return true;
+    if ( this.resposta == int.tryParse(resposta) ) return true;
     return false;
+  }
+
+  MathGame(Random rand){
+    this.rand = rand;
+    this._numeroAleatorio1 = 0;
+    this._numeroAleatorio2 = 0;
+    this.resposta = 0;
   }
 }
