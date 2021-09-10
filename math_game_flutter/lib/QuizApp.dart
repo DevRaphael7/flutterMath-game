@@ -11,16 +11,14 @@ class QuizApp extends StatefulWidget{
 
 class QuizAppState extends State<QuizApp>{
   int resposta1, resposta2, resposta3, resposta4, pergunta, acertos = 0, question = 0, limite = 5;
-
   Random randomico = new Random();
-    
 
   @override 
   Widget build(BuildContext context){
     int number1 = randomico.nextInt(50), number2 = randomico.nextInt(50);
     MathGame jogoMath = new MathGame(randomico);
     
-    jogoMath.gerarRespostasePergunta(randomico, 100, number1, number2);
+    jogoMath.gerarRespostasePergunta(randomico, number1, number2);
     pergunta = jogoMath.resposta;
 
     resposta1 = jogoMath.resposta1;
@@ -28,9 +26,16 @@ class QuizAppState extends State<QuizApp>{
     resposta3 = jogoMath.resposta3;
     resposta4 = jogoMath.resposta4;
     
+    void transferirParaTelas(){
+      Navigator.pushReplacementNamed(context, "/endpage", arguments: { 
+        "acertos" : acertos
+      });
+    }
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20.0),
+        alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -43,7 +48,8 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta1)) acertos++;
-                    if (jogoMath.acabouOuNao(question, limite)) Navigator.of(context).pushNamed("/quiz");
+                    transferirParaTelas();
+                    if (jogoMath.acabouOuNao(question, limite)) Navigator.of(context).pushNamed("/endpage");
                     question++;
                   });
                 },
@@ -56,6 +62,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta2)) acertos++;
+                    if (jogoMath.acabouOuNao(question, limite)) Navigator.of(context).pushNamed("/endpage");
                     question++;
                   });
                 },
@@ -68,6 +75,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta3)) acertos++;
+                    if (jogoMath.acabouOuNao(question, limite)) Navigator.of(context).pushNamed("/endpage");
                     question++;
                   });
                 },
@@ -80,6 +88,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta4)) acertos++;
+                    if (jogoMath.acabouOuNao(question, limite)) Navigator.of(context).pushNamed("/endpage");
                     question++;
                   });
                 },

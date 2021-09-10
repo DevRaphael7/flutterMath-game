@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:math_game_flutter/Endp.dart';
+import 'package:math_game_flutter/End.dart';
 import 'HomePage.dart';
 import 'QuizApp.dart';
-import 'Endp.dart';
+import 'End.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/quiz': (context) => QuizApp(),
-        '/endpage': (context) => EndPage()
+        '/endpage': (context) => FimdeJogo()
       },
     );
   }

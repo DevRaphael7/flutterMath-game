@@ -1,16 +1,13 @@
 import 'dart:math';
 
 class MathGame{
-  int _numeroAleatorio1;
-  int _numeroAleatorio2;
   int resposta;
-  Random rand;
   int resposta1;
   int resposta2;
   int resposta3;
   int resposta4;
 
-  void gerarRespostasePergunta(Random rand, int numero, int numero1, int numero2) {
+  void gerarRespostasePergunta(Random rand, int numero1, int numero2){
     this.resposta = numero1 + numero2;
     if ( this.resposta < 20 ) {
       this.resposta1 = rand.nextInt(30);
@@ -51,9 +48,6 @@ class MathGame{
   }
 
   MathGame(Random rand){
-    this.rand = rand;
-    this._numeroAleatorio1 = 0;
-    this._numeroAleatorio2 = 0;
     this.resposta = 0;
   }
 }
