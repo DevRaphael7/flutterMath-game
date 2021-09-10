@@ -6,6 +6,7 @@ class HomePage extends StatefulWidget{
 }
 
 class HomePageState extends State<HomePage>{
+  IconData icon = new IconData(3);
 
   @override 
   Widget build(BuildContext context){
