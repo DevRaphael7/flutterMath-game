@@ -11,41 +11,57 @@ class HomePageState extends State<HomePage>{
   @override 
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: Color(0xff8604f9),
       body: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white
+              ),
+              width: 800,
+              height: 150,
+              child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon( 
-                  Icons.games,
-                  size: 40.0,
-                  color: Colors.black,),
                   Padding(
                     padding: const EdgeInsets.only(left: 40.0)
                     ),
+                  Icon(
+                    Icons.games,
+                    size: 40,
+                    color: Color(0xff8604f9),
+                  ),
+                  Padding(padding: const EdgeInsets.only(right: 20)),
                   Text(
-                    "Math Game!", 
+                    "MathGame", 
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 40.0
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff8604f9),
+                      fontSize: 40.0,
                     ),)
               ],
             ),
+            ),
             Spacer(),
             ButtonTheme(
-              buttonColor: Colors.amber,
-              minWidth: 150,
+              buttonColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30)
+              ),
+              minWidth: 200,
+              highlightColor: Color(0xFF8604f9),
               height: 50,
               child: 
               RaisedButton(
                 child: Text(
                   "Jogar",
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Color(0xff8604f9),
                     fontWeight: FontWeight.bold,
                   ),),
                 onPressed: () {Navigator.of(context).pushNamed("/quiz");}
