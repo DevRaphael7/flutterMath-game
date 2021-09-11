@@ -10,7 +10,7 @@ class QuizApp extends StatefulWidget{
 }
 
 class QuizAppState extends State<QuizApp>{
-  int resposta1, resposta2, resposta3, resposta4, pergunta, acertos = 0, question = 0, limite = 5;
+  int resposta1, resposta2, resposta3, resposta4, pergunta, acertos = 0, question = 1, limite = 5;
   Random randomico = new Random();
 
   @override 
@@ -103,7 +103,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta2)) acertos++;
-                    if (jogoMath.acabouOuNao(question, limite)) Navigator.of(context).pushNamed("/endpage");
+                    fimDeJogo();
                     question++;
                   });
                 },
@@ -122,7 +122,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta3)) acertos++;
-                    if (jogoMath.acabouOuNao(question, limite)) Navigator.of(context).pushNamed("/endpage");
+                    fimDeJogo();
                     question++;
                   });
                 },
@@ -141,7 +141,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta4)) acertos++;
-                    if (jogoMath.acabouOuNao(question, limite)) Navigator.of(context).pushNamed("/endpage");
+                    fimDeJogo();
                     question++;
                   });
                 },
