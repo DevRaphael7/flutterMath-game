@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:math_game_flutter/widgets/Buttons.dart';
+import 'widgets/Texts.dart';
+import 'widgets/TextFields.dart';
+import 'widgets/Functions.dart' as data;
 
 class HomePage extends StatefulWidget{
   @override 
@@ -6,19 +10,7 @@ class HomePage extends StatefulWidget{
 }
 
 class HomePageState extends State<HomePage>{
-  IconData icon = new IconData(3);
-  final TextEditingController input1 = TextEditingController();
-
-  void passarParaOutraTela(){
-      Navigator.pushReplacementNamed(context, "/quiz", arguments: { 
-          "nome" : input1.text
-      });
-    }
-
-  bool passaParaProximaPagina(String texto){
-    if(texto != "" && texto != " ") return true;
-    return false;
-  }
+  final TextEditingController input1 = new TextEditingController();
 
   @override 
   Widget build(BuildContext context){
@@ -30,36 +22,10 @@ class HomePageState extends State<HomePage>{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.white
-              ),
-              width: 800,
-              height: 150,
-              child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40.0)
-                    ),
-                  Icon(
-                    Icons.games,
-                    size: 40,
-                    color: Color(0xff8604f9),
-                  ),
-                  Padding(padding: const EdgeInsets.only(right: 20)),
-                  Text(
-                    "MathGame", 
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff8604f9),
-                      fontSize: 40.0,
-                    ),)
-              ],
-            ),
-            ),
+
+            MathGameTxt(),
             Spacer(),
+
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(20),
@@ -84,7 +50,9 @@ class HomePageState extends State<HomePage>{
               ) ,
               ),
             ),
+
             Spacer(),
+
             ButtonTheme(
               buttonColor: Colors.white,
               shape: RoundedRectangleBorder(
@@ -93,19 +61,19 @@ class HomePageState extends State<HomePage>{
               minWidth: 200,
               highlightColor: Color(0xFF8604f9),
               height: 50,
-              child: 
-              RaisedButton(
-                child: Text(
-                  "Jogar",
+              child: RaisedButton(
+                child: Text( "Jogar",
                   style: TextStyle(
                     color: Color(0xff8604f9),
                     fontWeight: FontWeight.bold,
                   ),),
-                onPressed: () { 
-                  if(passaParaProximaPagina(input1.text)) passarParaOutraTela();
+                onPressed: () {
+                  if( data.passaParaProximaPagina(input1.text) ) {
+                    data.passarParaOutraTela(context, "/quiz", input: input1.text);
+                  }
                 }
-                ),
-            ),
+              ),
+            )       
           ],
         ),
       ),

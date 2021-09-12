@@ -1,8 +1,9 @@
 import 'dart:math';
-
+import 'widgets/Functions.dart' as data;
 import 'package:flutter/material.dart';
 import 'package:math_game_flutter/class/Quiz.dart';
 import 'widgets/Buttons.dart';
+import 'widgets/Texts.dart';
 
 class QuizApp extends StatefulWidget{
   @override 
@@ -10,14 +11,15 @@ class QuizApp extends StatefulWidget{
 }
 
 class QuizAppState extends State<QuizApp>{
+  
   int resposta1, resposta2, resposta3, resposta4, pergunta, acertos = 0, question = 1, limite = 5;
   Random randomico = new Random();
 
   @override 
   Widget build(BuildContext context){
 
-    Map data = ModalRoute.of(context).settings.arguments;
-    String nomeDoJogador = data["nome"];
+    Map dados = ModalRoute.of(context).settings.arguments;
+    String nomeDoJogador = dados["nome"];
 
     int number1 = randomico.nextInt(50), number2 = randomico.nextInt(50);
     MathGame jogoMath = new MathGame(randomico);
@@ -29,20 +31,6 @@ class QuizAppState extends State<QuizApp>{
     resposta2 = jogoMath.resposta2;
     resposta3 = jogoMath.resposta3;
     resposta4 = jogoMath.resposta4;
-    
-    void passarParaOutraTela(){
-      if (acertos == null) acertos = 0;
-      Navigator.pushReplacementNamed(context, "/endpage", arguments: { 
-          "acertos" : acertos,
-          "nome" : nomeDoJogador
-      });
-    }
-    void fimDeJogo() {
-      if (jogoMath.acabouOuNao(question, limite)) {
-        Navigator.of(context).pushNamed("/endpage");
-        passarParaOutraTela();
-      }
-    } 
 
     return Scaffold(
       backgroundColor: Color(0xff8604f9),
@@ -52,27 +40,7 @@ class QuizAppState extends State<QuizApp>{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              width: 500,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.transparent,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Question: $question/$limite', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                  ),
-                  Padding(padding: const EdgeInsets.only( bottom: 5)),
-                  Container(color: Colors.white, width: 500, height: 1,),
-                  Padding(padding: const EdgeInsets.only( bottom: 5)),
-                  Text('$number1 + $number2', style: TextStyle(fontSize: 50),),
-                ],
-              ),
-            ),
+            TextoQuestoes(question, limite, number1, number2),
             ButtonTheme(
               buttonColor: Colors.white,
               shape: RoundedRectangleBorder(
@@ -88,7 +56,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta1)) acertos++;
-                    fimDeJogo();
+                    if(jogoMath.acabouOuNao(question, limite)) data.passarParaOutraTela(context, "/endpage", acertos: acertos, input: nomeDoJogador);
                     question++;
                   });
                 },
@@ -107,7 +75,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta2)) acertos++;
-                    fimDeJogo();
+                    if(jogoMath.acabouOuNao(question, limite)) data.passarParaOutraTela(context, "/endpage", acertos: acertos, input: nomeDoJogador);
                     question++;
                   });
                 },
@@ -126,7 +94,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta3)) acertos++;
-                    fimDeJogo();
+                    if(jogoMath.acabouOuNao(question, limite)) data.passarParaOutraTela(context, "/endpage", acertos: acertos, input: nomeDoJogador);
                     question++;
                   });
                 },
@@ -145,7 +113,7 @@ class QuizAppState extends State<QuizApp>{
                 onPressed: () {
                   setState((){
                     if ( jogoMath.acertouOuNao(resposta4)) acertos++;
-                    fimDeJogo();
+                    if(jogoMath.acabouOuNao(question, limite)) data.passarParaOutraTela(context, "/endpage", acertos: acertos, input: nomeDoJogador);
                     question++;
                   });
                 },
