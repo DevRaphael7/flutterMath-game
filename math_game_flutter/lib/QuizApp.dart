@@ -16,6 +16,9 @@ class QuizAppState extends State<QuizApp>{
   @override 
   Widget build(BuildContext context){
 
+    Map data = ModalRoute.of(context).settings.arguments;
+    String nomeDoJogador = data["nome"];
+
     int number1 = randomico.nextInt(50), number2 = randomico.nextInt(50);
     MathGame jogoMath = new MathGame(randomico);
     
@@ -30,7 +33,8 @@ class QuizAppState extends State<QuizApp>{
     void passarParaOutraTela(){
       if (acertos == null) acertos = 0;
       Navigator.pushReplacementNamed(context, "/endpage", arguments: { 
-          "acertos" : acertos
+          "acertos" : acertos,
+          "nome" : nomeDoJogador
       });
     }
     void fimDeJogo() {

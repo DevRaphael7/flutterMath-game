@@ -7,6 +7,18 @@ class HomePage extends StatefulWidget{
 
 class HomePageState extends State<HomePage>{
   IconData icon = new IconData(3);
+  final TextEditingController input1 = TextEditingController();
+
+  void passarParaOutraTela(){
+      Navigator.pushReplacementNamed(context, "/quiz", arguments: { 
+          "nome" : input1.text
+      });
+    }
+
+  bool passaParaProximaPagina(String texto){
+    if(texto != "" && texto != " ") return true;
+    return false;
+  }
 
   @override 
   Widget build(BuildContext context){
@@ -48,6 +60,31 @@ class HomePageState extends State<HomePage>{
             ),
             ),
             Spacer(),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.black.withOpacity(0.6)
+              ),
+              width: 800,
+              height: 100,
+              child: TextField(
+                controller: input1,
+                style: TextStyle(
+                  color: Colors.white
+                ),
+                decoration: InputDecoration(
+                  hintText: "Seu nome",
+                  hintStyle: TextStyle(color: Colors.indigo),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+              ) ,
+              ),
+            ),
+            Spacer(),
             ButtonTheme(
               buttonColor: Colors.white,
               shape: RoundedRectangleBorder(
@@ -64,7 +101,9 @@ class HomePageState extends State<HomePage>{
                     color: Color(0xff8604f9),
                     fontWeight: FontWeight.bold,
                   ),),
-                onPressed: () {Navigator.of(context).pushNamed("/quiz");}
+                onPressed: () { 
+                  if(passaParaProximaPagina(input1.text)) passarParaOutraTela();
+                }
                 ),
             ),
           ],

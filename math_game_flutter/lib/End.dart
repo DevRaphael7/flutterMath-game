@@ -8,6 +8,7 @@ class FimdeJogo extends StatelessWidget{
     Map data = ModalRoute.of(context).settings.arguments;
 
     int acertos = data["acertos"];
+    String nomeDoJogador = data["nome"];
 
     return Scaffold(
       body: Container(
@@ -16,7 +17,7 @@ class FimdeJogo extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text("Você acertou: $acertos", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),),
+            Text("$nomeDoJogador\nacertou: $acertos", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
             ButtonTheme(
               buttonColor: Colors.white,
               shape: RoundedRectangleBorder(
